@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import * as serviceWorker from './serviceWorker';
+import {shuffle, sample} from 'underscore';
+
 
 const authors = [
   {
@@ -48,11 +50,22 @@ const authors = [
 ];
 
 function getTurnData(authors) {
-  const allBooks = authors.reduce(fuction (p, c, i) {
+  const allBooks = authors.reduce(function (p, c, i) {
     return p.concat(c.books);
   }, []);
-  
+  // the functions below use the shuffle and sample methods from the underscore
+  // library
+  const fourRandomBooks = shuffle(allBooks).slice(0,4);
+  const answer = sample(fourRandomBooks);
+
+  return {
+    books: fourRandomBooks,
+    author: authors.find((author) =>
+      author.books.some((title) =>
+        title === answer))
+  }
 }
+
 
 const state = {
   turnData: getTurnData(authors)
