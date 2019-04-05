@@ -56,7 +56,7 @@ function Continue({ show, onContinue }) {
     <div className="row continue">
     { show
       ? <div className="col-11">
-          <button className="btn btn-primary btn-lg float-right" value="Continue" />
+          <button className="btn btn-primary btn-lg float-right" onClick={onContinue} value="Continue" />
         </div>
       : null }
     </div>
